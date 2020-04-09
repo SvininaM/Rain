@@ -25,7 +25,6 @@ namespace Rain
         private Thread t = null;
         private bool stop = false;
 
-        private int counter = 0;
         public bool IsAlive
         {
             get { return t != null && t.IsAlive; }
@@ -37,27 +36,25 @@ namespace Rain
             DropD = rand.Next(1, 6);
             X = rand.Next(0, width);
             Y = 0;
-            dy = height/70;
+            dy = height/40;
         }
 
         public void Update(Rectangle r)
         {
             width = r.Width;
             height = r.Height;
-            dy = height / 70;
+            dy = height / 40;
         }
 
         private void Move()
         {
-            while (!stop)
+            while (!stop && Y < height)
             {
                 Thread.Sleep(30);
                 X += dx;
                 Y += dy;
                 if (X >= width) X = X%width;
                 if (X <= 0) X = width+X;
-                if (Y > height) stop = !stop;
-                counter++;
             }
         }
 
